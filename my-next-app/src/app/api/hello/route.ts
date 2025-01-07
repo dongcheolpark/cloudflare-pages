@@ -1,10 +1,6 @@
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { PrismaClient } from "@prisma/client";
 import { PrismaD1 } from "@prisma/adapter-d1";
-// import { getRequestContext } from '@cloudflare/next-on-pages'
-export interface Env {
-  DB: D1Database;
-}
 
 export const runtime = "edge";
 
