@@ -1,21 +1,18 @@
+import { PrismaClient } from "@prisma/client";
+import { PrismaD1 } from "@prisma/adapter-d1";
 // import { getRequestContext } from '@cloudflare/next-on-pages'
+export interface Env {
+  DB: D1Database;
+}
 
-export const runtime = 'edge'
+export const runtime = "edge";
 
 export async function GET() {
-  const responseText = 'Hello World'
+  console.log("DB", process.env.DB);
+  const adapter = new PrismaD1(process.env.DB as unknown as D1Database);
+  const prisma = new PrismaClient({ adapter });
 
-  // In the edge runtime you can use Bindings that are available in your application
-  // (for more details see:
-  //    - https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/#use-bindings-in-your-nextjs-application
-  //    - https://developers.cloudflare.com/pages/functions/bindings/
-  // )
-  //
-  // KV Example:
-  // const myKv = getRequestContext().env.MY_KV_NAMESPACE
-  // await myKv.put('suffix', ' from a KV store!')
-  // const suffix = await myKv.get('suffix')
-  // return new Response(responseText + suffix)
-
-  return new Response(responseText)
+  const users = await prisma.user.findMany();
+  const result = JSON.stringify(users);
+  return new Response(result);
 }
