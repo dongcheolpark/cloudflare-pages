@@ -1,3 +1,4 @@
+import { getRequestContext } from "@cloudflare/next-on-pages";
 import { PrismaClient } from "@prisma/client";
 import { PrismaD1 } from "@prisma/adapter-d1";
 // import { getRequestContext } from '@cloudflare/next-on-pages'
@@ -8,8 +9,8 @@ export interface Env {
 export const runtime = "edge";
 
 export async function GET() {
-  console.log("DB", process.env.DB);
-  const adapter = new PrismaD1(process.env.DB as unknown as D1Database);
+  console.log("DB", getRequestContext().env.DB);
+  const adapter = new PrismaD1(getRequestContext().env.DB);
   const prisma = new PrismaClient({ adapter });
 
   const users = await prisma.user.findMany();
