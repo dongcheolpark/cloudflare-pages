@@ -7,6 +7,7 @@ const A = async () => {
 
   return (
     <div>
+      <p>이건 서버 컴포넌트입니다.</p>
       {users.map((user) => (
         <div key={user.id}>
           <p>{user.id}</p>
