@@ -10,7 +10,9 @@ export default function Test() {
       <Suspense fallback={<div>로딩중...</div>}>
         <A />
       </Suspense>
-      <B />
+      <Suspense fallback={<div>로딩중...</div>}>
+        <B />
+      </Suspense>
     </div>
   );
 }
