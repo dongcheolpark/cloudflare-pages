@@ -7,10 +7,11 @@ if (process.env.NODE_ENV === "development") {
   setupDevPlatform();
 }
 
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+  },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
