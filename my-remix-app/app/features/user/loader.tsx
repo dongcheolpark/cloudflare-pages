@@ -1,16 +1,12 @@
-import { PrismaD1 } from "@prisma/adapter-d1";
-import { PrismaClient } from "@prisma/client";
-import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { json } from "@remix-run/cloudflare";
+import createLoader from "~/utils/createLoader";
 
-export const indexLoader = async ({ context }: LoaderFunctionArgs) => {
-  const { env } = context.cloudflare;
-  const adapter = new PrismaD1(env.DB);
-  const prisma = new PrismaClient({ adapter });
-  const users = await prisma.user.findMany();
+export const indexLoader = createLoader(async ({ db }) => {
+  const users = await db.user.findMany();
 
   return json({ users: users });
-};
+});
 
-export const showLoader = async () => {
+export const showLoader = createLoader(async () => {
   return json({ users: ["DEF"] });
-};
+});
