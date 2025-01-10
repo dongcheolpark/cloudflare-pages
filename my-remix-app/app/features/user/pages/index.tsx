@@ -7,16 +7,18 @@ export default function Index() {
   return (
     <div>
       <h1>index</h1>
-      {users.map((user) => (
-        <div key={user.id}>
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
-        </div>
-      ))}
       <nav>
         <ul>
           <li>
-            <NavLink to="/users/1">1 Show</NavLink>
+            {users.map((user) => (
+              <div key={user.id}>
+                <h2>{user.name}</h2>
+                <p>{user.email}</p>
+                <NavLink key={user.id} to={`/users/${user.id}`}>
+                  Show
+                </NavLink>
+              </div>
+            ))}
           </li>
         </ul>
       </nav>
