@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { NavLink, useLoaderData } from "@remix-run/react";
 import { indexLoader } from "~/features/user/loader";
 
 export default function Index() {
@@ -7,9 +7,13 @@ export default function Index() {
   return (
     <div>
       <h1>{text}</h1>
-      <div>
-        <Outlet />
-      </div>
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/users/1">1 Show</NavLink>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }
