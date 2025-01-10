@@ -1,4 +1,4 @@
-import getManyUser from "@/app/test/service/user";
+import { getManyUser } from "@/app/test/service/user";
 
 export const runtime = "edge";
 
