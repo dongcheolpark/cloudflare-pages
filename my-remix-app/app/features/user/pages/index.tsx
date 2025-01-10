@@ -2,11 +2,17 @@ import { NavLink, useLoaderData } from "@remix-run/react";
 import { indexLoader } from "~/features/user/loader";
 
 export default function Index() {
-  const { text } = useLoaderData<typeof indexLoader>();
+  const { users } = useLoaderData<typeof indexLoader>();
 
   return (
     <div>
-      <h1>{text}</h1>
+      <h1>index</h1>
+      {users.map((user) => (
+        <div key={user.id}>
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+        </div>
+      ))}
       <nav>
         <ul>
           <li>
