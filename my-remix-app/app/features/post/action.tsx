@@ -20,3 +20,8 @@ export const insertAction = createAction(async ({ db, request }) => {
   await db.post.create({ data });
   return redirect("/posts");
 });
+
+export const destroyAction = createAction(async ({ db, params }) => {
+  await db.post.delete({ where: { id: Number(params.postId) } });
+  return redirect("/posts");
+});
