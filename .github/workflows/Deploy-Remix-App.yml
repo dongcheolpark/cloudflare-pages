@@ -17,6 +17,16 @@ jobs:
         with:
           ref: main
 
+      - uses: pnpm/action-setup@v3
+
+      - uses: actions/setup-node@v4
+        timeout-minutes: 5
+        with:
+          node-version-file: package.json
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Migrate Schema to Remote D1
         uses: cloudflare/wrangler-action@v3
         with:
