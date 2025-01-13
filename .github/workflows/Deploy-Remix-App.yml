@@ -20,25 +20,27 @@ jobs:
       - uses: actions/setup-node@v4
         timeout-minutes: 5
         with:
-          node-version-file: package.json
+          node-version-file: ./my-remix-app/package.json
 
       - uses: pnpm/action-setup@v3
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          cd my-remix-app
+          pnpm install
 
       - name: Migrate Schema to Remote D1
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: my-remix-app
           packageManager: pnpm
+          workingDirectory: my-remix-app
           command: pnpm run-migration --remote
 
       - name: Deploy App
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: my-remix-app
           packageManager: pnpm
+          workingDirectory: my-remix-app
           command: pnpm deploy
