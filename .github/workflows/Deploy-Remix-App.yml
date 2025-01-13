@@ -3,8 +3,8 @@ name: Deploy-Remix-App
 on:
   push:
     branches: [main]
-    paths:
-      - "my-remix-app/**"
+    # paths:
+    #   - "my-remix-app/**"
 
 run-name: "Deploy brand_site to staging: ${{ github.sha }}"
 
@@ -17,12 +17,12 @@ jobs:
         with:
           ref: main
 
-      - uses: pnpm/action-setup@v3
-
       - uses: actions/setup-node@v4
         timeout-minutes: 5
         with:
           node-version-file: package.json
+
+      - uses: pnpm/action-setup@v3
 
       - name: Install dependencies
         run: pnpm install
