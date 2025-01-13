@@ -12,7 +12,10 @@
     "typecheck": "tsc",
     "typegen": "wrangler types",
     "preview": "pnpm run build && wrangler pages dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "create-migration": "npx wrangler d1 migrations create remix-demo-db",
+    "diff-migration": "npx prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script --output ",
+    "run-migration": "npx wrangler d1 migrations apply remix-demo-db"
   },
   "dependencies": {
     "@prisma/adapter-d1": "^6.2.1",
