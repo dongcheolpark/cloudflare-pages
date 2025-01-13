@@ -1,10 +1,11 @@
 import { Post } from "@prisma/client";
 import styles from "./index.module.scss";
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { Await, Form, Link, useLoaderData } from "@remix-run/react";
 import { indexLoader } from "~/features/post/loader";
+import { Suspense } from "react";
 
 export default function Index() {
-  const { posts } = useLoaderData<typeof indexLoader>();
+  const { postsPromise } = useLoaderData<typeof indexLoader>();
 
   return (
     <div>
@@ -12,9 +13,13 @@ export default function Index() {
       <div>
         <Link to="create">create</Link>
         <div className={styles.postList}>
-          {posts.map((post) => (
-            <PostItem key={post.id} post={post} />
-          ))}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Await resolve={postsPromise}>
+              {(posts) =>
+                posts.map((post) => <PostItem key={post.id} post={post} />)
+              }
+            </Await>
+          </Suspense>
         </div>
       </div>
     </div>
