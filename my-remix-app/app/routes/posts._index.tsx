@@ -1,9 +1,9 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { indexLoader } from "~/features/user/loader";
-import Index from "~/features/user/pages";
+import Index from "~/features/post/pages";
+import { indexLoader } from "~/features/post/loader";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "User Index" }];
+  return [{ title: "Post Index" }];
 };
 
 export { indexLoader as loader };
