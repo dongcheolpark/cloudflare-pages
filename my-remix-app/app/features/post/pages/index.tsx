@@ -33,7 +33,7 @@ const PostItem = ({ post }: { post: Post }) => {
         #{post.id} {post.title}
       </h2>
       <div className={styles.buttonWrapper}>
-        <Link to={`edit/${post.id}`}>수정</Link>
+        <Link to={`${post.id}/edit`}>수정</Link>
         <Form
           action={`${post.id}/destroy`}
           method="post"

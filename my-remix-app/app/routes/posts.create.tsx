@@ -3,7 +3,7 @@ import { insertAction } from "~/features/post/action";
 import Create from "~/features/post/pages/create";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "Post Index" }];
+  return [{ title: "Post Create" }];
 };
 
 export const action = insertAction;
